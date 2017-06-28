@@ -22,7 +22,7 @@ public class UserTestCase {
 		user.setRole("user");
 		user.setStatus("approved");
 		user.setEmail("pay@gmail.com");
-		userDAO.saveOrUpdate(user);
+		userDAO.addOrUpdateUser(user);
 		System.out.println("user created");
 	
 	}

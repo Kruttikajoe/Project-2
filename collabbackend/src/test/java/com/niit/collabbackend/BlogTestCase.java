@@ -28,7 +28,7 @@ public class BlogTestCase {
 		blog.setLikes(10);
 		blog.setStatus("Approved");
 		blog.setUserid(1);
-		blogDAO.saveOrUpdate(blog);
+		blogDAO.addOrUpdateBlog(blog);
 		System.out.println("blog created");
 		
 	}

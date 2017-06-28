@@ -2,7 +2,6 @@ package com.niit.collabbackend.DAO;
 
 import java.util.List;
 
-
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -14,7 +13,7 @@ import com.niit.collabbackend.model.Job;
 @EnableTransactionManagement
 
 public class JobDAOImpl implements JobDAO {
-	
+
 	private SessionFactory sessionFactory;
 
 	public JobDAOImpl(SessionFactory sessionFactory) {
@@ -30,14 +29,11 @@ public class JobDAOImpl implements JobDAO {
 	@Override
 	@Transactional
 	public boolean addOrUpdateJob(Job job) {
-		try
-		{
+		try {
 			sessionFactory.openSession().saveOrUpdate(job);
 			return true;
-			
-		}
-		catch(Exception e)
-		{
+
+		} catch (Exception e) {
 			System.out.println("Exception in addOrUpdateJob of JobDAOImpl");
 			e.printStackTrace();
 			return false;
@@ -47,13 +43,10 @@ public class JobDAOImpl implements JobDAO {
 	@Override
 	@Transactional
 	public boolean deleteJob(Job job) {
-		try
-		{
+		try {
 			sessionFactory.getCurrentSession().delete(job);
 			return true;
-		}
-		catch(Exception e)
-		{
+		} catch (Exception e) {
 			System.out.println("Exception in deleteJob of JobDAOImpl");
 			e.printStackTrace();
 			return false;
@@ -63,12 +56,9 @@ public class JobDAOImpl implements JobDAO {
 	@Override
 	@Transactional
 	public List<Job> getListOfJob() {
-		try
-		{
+		try {
 			return sessionFactory.openSession().createQuery("from Job").getResultList();
-			}
-		catch(Exception e)
-		{
+		} catch (Exception e) {
 			System.out.println("Exception in getListOfJob of JobDAOImpl");
 			e.printStackTrace();
 			return null;
@@ -78,12 +68,9 @@ public class JobDAOImpl implements JobDAO {
 	@Override
 	@Transactional
 	public Job getParticularJob(int job_id) {
-		try
-		{
-			return (Job)sessionFactory.getCurrentSession().get(Job.class, job_id);	
-		}
-		catch(Exception e)
-		{
+		try {
+			return (Job) sessionFactory.getCurrentSession().get(Job.class, job_id);
+		} catch (Exception e) {
 			System.out.println("Exception in getParticularJob of JobDAOImpl");
 			e.printStackTrace();
 			return null;

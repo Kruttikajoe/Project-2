@@ -23,42 +23,48 @@ public class BlogDAOImpl implements BlogDAO {
 		this.sessionFactory = sessionFactory;
 	}
 
-	@Override
 	@Transactional
-	public Blog getBlog(String id) {
-		try {
-
-			return sessionFactory.getCurrentSession().createQuery("from Blog where blog_id=:id", Blog.class)
-					.setParameter("id", id).getSingleResult();
-
-		} catch (Exception e) {
-			System.out.println("Exception in get method of blogDAO");
-			e.printStackTrace();
-			return null;
-		}
-	}
-
-	@Override
-	@Transactional
-	public List<Blog> getAllBlogs() {
-		try {
-			return sessionFactory.getCurrentSession().createQuery("from Blog", Blog.class).getResultList();
-		} catch (Exception e) {
-			System.out.println(e);
-			return null;
-		}
-	}
-
-	@Override
-	@Transactional
-	public boolean saveOrUpdate(Blog blog) {
+	public boolean addOrUpdateBlog(Blog blog) {
 		try {
 			sessionFactory.getCurrentSession().saveOrUpdate(blog);
 			return true;
 		} catch (Exception e) {
+			System.out.println("Exception in addOrUpdateBlog of BlogDAOImpl");
 			e.printStackTrace();
-			System.out.println("exception occured");
 			return false;
+		}
+	}
+
+	@Transactional
+	public boolean deleteBlog(Blog blog) {
+		try {
+			sessionFactory.getCurrentSession().delete(blog);
+			return true;
+		} catch (Exception e) {
+			System.out.println("Exception in deleteBlog of BlogDAOImpl");
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+	@Transactional
+	public List<Blog> getListOfBlog() {
+		try {
+			return sessionFactory.getCurrentSession().createQuery("from Blog", Blog.class).getResultList();
+		} catch (Exception e) {
+			System.out.println("Exception in getListOfBlog of BlogDAOImpl");
+			return null;
+		}
+	}
+
+	@Transactional
+	public Blog getParticularBlog(int blogid) {
+		try {
+			return (Blog) sessionFactory.getCurrentSession().get(Blog.class, blogid);
+		} catch (Exception e) {
+			System.out.println("Exception in getParticularBlog of BlogDAOImpl");
+			e.printStackTrace();
+			return null;
 		}
 	}
 

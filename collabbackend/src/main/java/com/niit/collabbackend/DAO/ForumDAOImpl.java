@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.niit.collabbackend.model.Forum;
 
 public class ForumDAOImpl implements ForumDAO {
-	
+
 	private SessionFactory sessionFactory;
 
 	public ForumDAOImpl(SessionFactory sessionFactory) {
@@ -17,44 +17,50 @@ public class ForumDAOImpl implements ForumDAO {
 	}
 
 	public ForumDAOImpl() {
-super();
-}
+		super();
+	}
 
-	@Override
 	@Transactional
-	public boolean saveOrUpdate(Forum forum) {
+	public boolean addOrUpdateForum(Forum forum) {
 		try {
 			sessionFactory.getCurrentSession().saveOrUpdate(forum);
 			return true;
 		} catch (Exception e) {
+			System.out.println("Exception in addOrUpdateForum of ForumDAOImpl");
 			e.printStackTrace();
-			System.out.println("exception occured");
 			return false;
 		}
 	}
 
-	@Override
 	@Transactional
-	public Forum getForum(String id) {
+	public boolean deleteForum(Forum forum) {
 		try {
-
-			return sessionFactory.getCurrentSession().createQuery("from Forum where forum_id=:id", Forum.class)
-					.setParameter("id", id).getSingleResult();
-
+			sessionFactory.getCurrentSession().delete(forum);
+			return true;
 		} catch (Exception e) {
-			System.out.println("Exception in get method of forumDAO");
+			System.out.println("Exception in deleteForum of ForumDAOImpl");
 			e.printStackTrace();
+			return false;
+		}
+	}
+
+	@Transactional
+	public List<Forum> getListOfForum() {
+		try {
+			return sessionFactory.getCurrentSession().createQuery("from Forum", Forum.class).getResultList();
+		} catch (Exception e) {
+			System.out.println("Exception in getListOfForum of ForumDAOImpl");
 			return null;
 		}
 	}
 
-	@Override
 	@Transactional
-	public List<Forum> getAllForums() {
+	public Forum getParticularForum(int forumid) {
 		try {
-			return sessionFactory.getCurrentSession().createQuery("from Forum", Forum.class).getResultList();
+			return (Forum) sessionFactory.getCurrentSession().get(Forum.class, forumid);
 		} catch (Exception e) {
-			System.out.println(e);
+			System.out.println("Exception in getParticularForum of ForumDAOImpl");
+			e.printStackTrace();
 			return null;
 		}
 	}

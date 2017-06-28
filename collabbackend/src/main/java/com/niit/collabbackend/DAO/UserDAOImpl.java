@@ -21,72 +21,49 @@ public class UserDAOImpl implements UserDAO {
 		// TODO Auto-generated constructor stub
 	}
 
-	@Override
 	@Transactional
-	public boolean saveOrUpdate(Users user) {
+	public boolean addOrUpdateUser(Users user) {
 		try {
 			sessionFactory.getCurrentSession().saveOrUpdate(user);
 			return true;
 		} catch (Exception e) {
+			System.out.println("Exception in addOrUpdateUser of UserDAOImpl");
 			e.printStackTrace();
-			System.out.println("exception occured");
 			return false;
 		}
 	}
 
 	@Transactional
-	public List<Users> list() {
-		try {
-			return sessionFactory.getCurrentSession().createQuery("from Users", Users.class).getResultList();
-		} catch (Exception e) {
-			System.out.println(e);
-			return null;
-		}
-	}
-
-	@Override
-	@Transactional
-	public boolean delete(Users user) {
+	public boolean deleteUser(Users user) {
 		try {
 			sessionFactory.getCurrentSession().delete(user);
 			return true;
 		} catch (Exception e) {
+			System.out.println("Exception in deleteUser of UserDAOImpl");
 			e.printStackTrace();
 			return false;
 		}
 	}
 
-	@Override
 	@Transactional
-	public Users get(String email) {
+	public List<Users> getListOFUsers() {
 		try {
-
-			return sessionFactory.getCurrentSession().createQuery("from Users where emailid=:email", Users.class)
-					.setParameter("email", email).getSingleResult();
-
+			return sessionFactory.getCurrentSession().createQuery("from Users", Users.class).getResultList();
 		} catch (Exception e) {
-			System.out.println("Exception in get method of userDAO");
-			e.printStackTrace();
+			System.out.println("Exception in getListOFUsers of UserDAOImpl");
 			return null;
 		}
 	}
 
-	@Override
-	public List<Users> getListOFUsers() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Users getParticularUser(int userid) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void deleteUser(Object particularUser) {
-		// TODO Auto-generated method stub
-		
+	@Transactional
+	public Users getParticularUser(int user_id) {
+		try {
+			return (Users) sessionFactory.getCurrentSession().get(Users.class, user_id);
+		} catch (Exception e) {
+			System.out.println("Exception in getParticularUser of UserDAOImpl");
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 }

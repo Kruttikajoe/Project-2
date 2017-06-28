@@ -6,8 +6,12 @@ import com.niit.collabbackend.model.Blog;
 
 public interface BlogDAO {
 	
-	public Blog getBlog(String id);
-	public List<Blog> getAllBlogs();
-	public boolean saveOrUpdate(Blog blog);
+public boolean addOrUpdateBlog(Blog blog);
+	
+	public boolean deleteBlog(Blog blog);
+	
+	public List<Blog> getListOfBlog();
+	
+	public Blog getParticularBlog(int blogid);
 
 }
