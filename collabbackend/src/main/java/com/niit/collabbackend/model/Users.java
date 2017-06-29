@@ -1,12 +1,20 @@
 package com.niit.collabbackend.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.stereotype.Component;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name="Users")
@@ -36,6 +44,18 @@ public class Users {
 	@NotEmpty(message = "isonline cannot be blank")
     private String isOnline;
 	
+	@OneToMany(mappedBy="user",cascade=CascadeType.ALL,fetch=FetchType.EAGER)
+	@JsonManagedReference
+	private List<Blog> blog = new ArrayList<Blog>();
+	
+	@OneToMany(mappedBy="user",cascade=CascadeType.ALL,fetch=FetchType.EAGER)
+	@JsonManagedReference
+	private List<Forum> forum = new ArrayList<Forum>();
+	
+	@OneToMany(mappedBy="user",cascade=CascadeType.ALL,fetch=FetchType.EAGER)
+	@JsonManagedReference
+	private List<Friend> friend =  new ArrayList<Friend>();
+	
 	public int getUserid() {
 		return userid;
 	}
@@ -54,6 +74,30 @@ public class Users {
 
 	public String getPassword() {
 		return password;
+	}
+
+	public List<Blog> getBlog() {
+		return blog;
+	}
+
+	public void setBlog(List<Blog> blog) {
+		this.blog = blog;
+	}
+
+	public List<Forum> getForum() {
+		return forum;
+	}
+
+	public void setForum(List<Forum> forum) {
+		this.forum = forum;
+	}
+
+	public List<Friend> getFriend() {
+		return friend;
+	}
+
+	public void setFriend(List<Friend> friend) {
+		this.friend = friend;
 	}
 
 	public void setPassword(String password) {
