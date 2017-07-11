@@ -5,14 +5,13 @@ import java.util.List;
 import com.niit.collabbackend.model.BlogComment;
 
 public interface BlogCommentDAO {
-	
-	public boolean saveOrUpdateBlogComment(BlogComment blogComment);
-	
-	public boolean deleteBlogComment(BlogComment blogComment);
-	
-	public List<BlogComment> getListOfBlogComments();
-	
-	public BlogComment getParticularBlogComment(int blog_comment_id);
 
+	public boolean addOrUpdateBlogComment(BlogComment blogComment);
+
+	public boolean deleteBlogComment(BlogComment blogComment);
+
+	public BlogComment getParticulatBlogComment(int bComment_id);
+
+	public List<BlogComment> getParticularBlogCommentsList(int blog_id);
 
 }
