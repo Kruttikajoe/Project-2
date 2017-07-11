@@ -1,228 +1,219 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Bootstrap Example</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <style>
-.row{
-    margin-left:0px;
-    margin-right:0px;
+<title>Bootstrap Example</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<style>
+.row {
+	margin-left: 0px;
+	margin-right: 0px;
 }
 
 #wrapper {
-    padding-left: 70px;
-    transition: all .4s ease 0s;
-    height: 100%
+	padding-left: 70px;
+	transition: all .4s ease 0s;
+	height: 100%
 }
 
 #sidebar-wrapper {
-    margin-left: -150px;
-    left: 70px;
-    width: 150px;
-    background: #222;
-    position: fixed;
-    height: 100%;
-    z-index: 10000;
-    transition: all .4s ease 0s;
+	margin-left: -150px;
+	left: 70px;
+	width: 150px;
+	background: #222;
+	position: fixed;
+	height: 100%;
+	z-index: 10000;
+	transition: all .4s ease 0s;
 }
 
 .sidebar-nav {
-    display: block;
-    float: left;
-    width: 150px;
-    list-style: none;
-    margin: 0;
-    padding: 0;
+	display: block;
+	float: left;
+	width: 150px;
+	list-style: none;
+	margin: 0;
+	padding: 0;
 }
+
 #wrapper.active {
-    padding-left: 150px;
+	padding-left: 150px;
 }
+
 #wrapper.active #sidebar-wrapper {
-    left: 150px;
+	left: 150px;
 }
 
 #sidebar_menu li a, .sidebar-nav li a {
-    color: #999;
-    display: block;
-    float: left;
-    text-decoration: none;
-    width: 150px;
-    background: #252525;
-    border-top: 1px solid #373737;
-    border-bottom: 1px solid #1A1A1A;
-    -webkit-transition: background .5s;
-    -moz-transition: background .5s;
-    -o-transition: background .5s;
-    -ms-transition: background .5s;
-    transition: background .5s;
+	color: #999;
+	display: block;
+	float: left;
+	text-decoration: none;
+	width: 150px;
+	background: #252525;
+	border-top: 1px solid #373737;
+	border-bottom: 1px solid #1A1A1A;
+	-webkit-transition: background .5s;
+	-moz-transition: background .5s;
+	-o-transition: background .5s;
+	-ms-transition: background .5s;
+	transition: background .5s;
 }
+
 .sidebar_name {
-    padding-top: 25px;
-    color: #fff;
-    opacity: .7;
+	padding-top: 25px;
+	color: #fff;
+	opacity: .7;
 }
 
 .sidebar-nav li {
-  line-height: 40px;
-  text-indent: 20px;
+	line-height: 40px;
+	text-indent: 20px;
 }
 
 .sidebar-nav li a {
-  color: #999999;
-  display: block;
-  text-decoration: none;
+	color: #999999;
+	display: block;
+	text-decoration: none;
 }
 
 .sidebar-nav li a:hover {
-  color: #fff;
-  background: rgba(255,255,255,0.2);
-  text-decoration: none;
+	color: #fff;
+	background: rgba(255, 255, 255, 0.2);
+	text-decoration: none;
 }
 
-.sidebar-nav li a:active,
-.sidebar-nav li a:focus {
-  text-decoration: none;
+.sidebar-nav li a:active, .sidebar-nav li a:focus {
+	text-decoration: none;
 }
 
-.sidebar-nav > .sidebar-brand {
-  height: 65px;
-  line-height: 60px;
-  font-size: 18px;
+.sidebar-nav>.sidebar-brand {
+	height: 65px;
+	line-height: 60px;
+	font-size: 18px;
 }
 
-.sidebar-nav > .sidebar-brand a {
-  color: #999999;
+.sidebar-nav>.sidebar-brand a {
+	color: #999999;
 }
 
-.sidebar-nav > .sidebar-brand a:hover {
-  color: #fff;
-  background: none;
+.sidebar-nav>.sidebar-brand a:hover {
+	color: #fff;
+	background: none;
 }
 
-#main_icon
-{
-    float:right;
-   padding-right: 65px;
-   padding-top:20px;
-}
-.sub_icon
-{
-    float:right;
-   padding-right: 65px;
-   padding-top:10px;
+#main_icon {
+	float: right;
+	padding-right: 65px;
+	padding-top: 20px;
 }
 
-@media (max-width:767px) {
-    #wrapper {
-    padding-left: 70px;
-    transition: all .4s ease 0s;
-}
-#sidebar-wrapper {
-    left: 70px;
-}
-#wrapper.active {
-    padding-left: 150px;
-}
-#wrapper.active #sidebar-wrapper {
-    left: 150px;
-    width: 150px;
-    transition: all .4s ease 0s;
-}
+.sub_icon {
+	float: right;
+	padding-right: 65px;
+	padding-top: 10px;
 }
 
-
-  
-
-  </style>
+@media ( max-width :767px) {
+	#wrapper {
+		padding-left: 70px;
+		transition: all .4s ease 0s;
+	}
+	#sidebar-wrapper {
+		left: 70px;
+	}
+	#wrapper.active {
+		padding-left: 150px;
+	}
+	#wrapper.active #sidebar-wrapper {
+		left: 150px;
+		width: 150px;
+		transition: all .4s ease 0s;
+	}
+}
+</style>
 </head>
 <body background="Images/k.jpg">
 
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#">Geek Connect</a>
-    </div>
-    <form class="navbar-form navbar-left">
-      <div class="input-group" style="width:400%">
-        <input type="text" class="form-control" placeholder="Search">
-        <div class="input-group-btn">
-          <button class="btn btn-default" type="submit">
-            <i class="glyphicon glyphicon-search"></i>
-          </button>
-        </div>
-      </div>
-    </form>
-    <ul class="nav navbar-nav navbar-right">
-      <li><a href="Register"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-      <li><a href="Login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-    </ul>
-  </div>
-</nav>
+	<nav class="navbar navbar-inverse">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#">Geek Connect</a>
+			</div>
+			<form class="navbar-form navbar-left">
+				<div class="input-group" style="width: 400%">
+					<input type="text" class="form-control" placeholder="Search">
+					<div class="input-group-btn">
+						<button class="btn btn-default" type="submit">
+							<i class="glyphicon glyphicon-search"></i>
+						</button>
+					</div>
+				</div>
+			</form>
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="Register"><span
+						class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+				<li><a href="Login"><span
+						class="glyphicon glyphicon-log-in"></span> Login</a></li>
+			</ul>
+		</div>
+	</nav>
 
-<div id="wrapper" class="active">
-      
-      <!-- Sidebar -->
-            <!-- Sidebar -->
-      <div id="sidebar-wrapper">
-      <ul id="sidebar_menu" class="sidebar-nav">
-           <li class="sidebar-brand"><a id="menu-toggle" href="#">Home</a></li>
-      </ul>
-        <ul class="sidebar-nav" id="sidebar">     
-                <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Blog <span class="caret"></span></a>
-          <ul class="dropdown-menu forAnimate" role="menu">
-            <li><a href="#">All Blogs</a></li>
-            <li class="divider"></li>
-            <li><a href="#">My Blogs</a></li>
-            <li class="divider"></li>
-            <li><a href="#">Create a Blog</a></li>
-          </ul>
-        </li>          
-                <li class="dropdown">
-                    <a data-toggle="dropdown" class="dropdown-toggle" href="#">Forum <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">All Forums</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">My Forums</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">Create a Forum</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a data-toggle="dropdown" class="dropdown-toggle" href="#">Jobs <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">All Jobs</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">My Jobs</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">Create a Job</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a data-toggle="dropdown" class="dropdown-toggle" href="#">Events <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">All Events</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">My Events</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">Create an Event</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a data-toggle="dropdown" class="dropdown-toggle" href="#">Friends <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">All Friends</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">View My Friends</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </ul>
-      </div>
+	<div id="wrapper" class="active">
+
+		<!-- Sidebar -->
+		<!-- Sidebar -->
+		<div id="sidebar-wrapper">
+			<ul id="sidebar_menu" class="sidebar-nav">
+				<li class="sidebar-brand"><a id="menu-toggle" href="#">Home</a></li>
+			</ul>
+			<ul class="sidebar-nav" id="sidebar">
+				<li><a href="#" data-target="#item1" data-toggle="collapse"
+					data-parent="#stacked-endmenu">Blog<span class="caret arrow"></span></a>
+					<ul class="nav nav-stacked collapse left-submenu" id="item1">
+						<li><a href=#>All Blogs</a></li>
+						<li><a href=#>My Blogs</a></li>
+						<li><a href=#>Create a Blog</a></li>
+
+					</ul></li>
+				<li><a href="#" data-target="#item2" data-toggle="collapse"
+					data-parent="#stacked-endmenu">Forum<span class="caret arrow"></span></a>
+					<ul class="nav nav-stacked collapse left-submenu" id="item2">
+						<li><a href=#>All Forums</a></li>
+						<li><a href=#>My Forums</a></li>
+						<li><a href=#>Create a Forum</a></li>
+
+					</ul></li>
+				<li><a href="#" data-target="#item3" data-toggle="collapse"
+					data-parent="#stacked-endmenu">Jobs<span class="caret arrow"></span></a>
+					<ul class="nav nav-stacked collapse left-submenu" id="item3">
+						<li><a href=#>All Jobs</a></li>
+						<li><a href=#>My Jobs</a></li>
+						<li><a href=#>Create a Job</a></li>
+
+					</ul></li>
+				<li><a href="#" data-target="#item4" data-toggle="collapse"
+					data-parent="#stacked-menu">Events<span class="caret arrow"></span></a>
+					<ul class="nav nav-stacked collapse left-submenu" id="item4">
+						<li><a href=#>All Events</a></li>
+						<li><a href=#>My Events</a></li>
+						<li><a href=#>Create Event</a></li>
+
+					</ul></li>
+				<li><a href="#" data-target="#item5" data-toggle="collapse"
+					data-parent="#stacked-menu">Friends<span class="caret arrow"></span></a>
+					<ul class="nav nav-pills nav-stacked collapse" id="item5">
+						<li><a href="#">All Friends</a></li>
+						<li><a href="#">View myFriends</a></li>
+					</ul></li>
+			</ul>
+		</div>
 </body>
 </html>
 
