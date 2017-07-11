@@ -46,7 +46,7 @@ public class ApplicationContextConfig {
 		datasource.setDriverClassName("oracle.jdbc.driver.OracleDriver");
 		datasource.setUrl("jdbc:oracle:thin:@localhost:1521:XE");
 		datasource.setUsername("CollaborationDB");
-		datasource.setPassword("CollaborationDB");
+		datasource.setPassword("dadmomrutu#123");
 		System.out.println("Datasource");
 		return datasource;
 	}
