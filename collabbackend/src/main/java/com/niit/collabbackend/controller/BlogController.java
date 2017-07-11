@@ -1,6 +1,9 @@
 package com.niit.collabbackend.controller;
 
+import java.util.Date;
 import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -32,11 +35,22 @@ public class BlogController {
 	@Autowired
 	UserDAO userDAO;
 
+	@Autowired
+	HttpSession httpSession;
+
 	// To get the list of all the blog objects
 	@RequestMapping(value = "/getListOfBlog", method = RequestMethod.GET)
 	public ResponseEntity<List<Blog>> getListOfBlog() {
+		System.out.println("starting of the list of Blogs method");
 		List<Blog> bloglist = blogDAO.getListOfBlog();
-		return new ResponseEntity<List<Blog>>(bloglist, HttpStatus.OK);
+		if (bloglist != null && !bloglist.isEmpty()) {
+			System.out.println("List is not empty, returning the list of blogs");
+			return new ResponseEntity<List<Blog>>(bloglist, HttpStatus.OK);
+		} else {
+			blog.setErrCode("404");
+			blog.setErrMessage("There are no users registered, please register!");
+			return new ResponseEntity<List<Blog>>(bloglist, HttpStatus.OK);
+		}
 	}
 
 	/*
@@ -49,21 +63,22 @@ public class BlogController {
 		return new ResponseEntity<Blog>(particularblog, HttpStatus.OK);
 	}
 
-	/*
-	 * To get a particular user details with blogid In postman the user will
-	 * display the blog and forum details along with it
-	 */
-	@RequestMapping(value = "/getUserDetailsWithBlogid/{blogid}", method = RequestMethod.GET)
-	public ResponseEntity<Users> getUserDetailsWithBlogid(@PathVariable("blogid") int blogid) {
-		Blog blogwithuser = blogDAO.getParticularBlog(blogid);
-		return new ResponseEntity<Users>(blogwithuser.getUser(), HttpStatus.OK);
-	}
-
 	// To add a particular blog details in the DB
 	@RequestMapping(value = "/addBlog", method = RequestMethod.POST)
-	public ResponseEntity<String> addBlog(@RequestBody Blog blog) {
-		System.out.println(blog.getUser());
-		blog.setStatus("PENDING");
+	public ResponseEntity<String> addBlog(@RequestBody Blog blog, HttpSession httpSession) {
+		int loggedInUserID = (int) httpSession.getAttribute("loggedInUserID");
+
+		blog.setUser_id(loggedInUserID);
+
+		if (((userDAO.getParticularUser(loggedInUserID)).getRole()).equalsIgnoreCase("admin")) {
+			blog.setStatus("APPROVED");
+		} else {
+			blog.setStatus("PENDING");
+		}
+
+		blog.setLikes(0);
+		blog.setCreate_date(new Date());
+
 		blogDAO.addOrUpdateBlog(blog);
 		return new ResponseEntity<String>("Blog added successfully", HttpStatus.OK);
 	}
