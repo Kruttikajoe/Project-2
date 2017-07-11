@@ -11,40 +11,32 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.stereotype.Component;
 
 @Entity
-@Table(name="Forum")
+@Table(name = "Forum")
 @Component
 
-public class Forum {
-	
+public class Forum extends Status {
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "generator")
+	@SequenceGenerator(name = "generator", sequenceName = "forum_seq", allocationSize = 1)
 	private int forum_id;
-	
-	@NotEmpty(message="forum name cannot be blank")
-	private String forum_name;
-	
-	@NotEmpty(message="forum content cannot be blank")
-	private String forum_content;
-	
-	@NotNull(message="date cannot be blank")
+
+	private String forum_name, forum_content, status;
+
+	private int user_id;
+
+	@Temporal(TemporalType.DATE)
 	private Date create_date;
-	
-	@NotEmpty(message="status cannot be blank")
-	private String status;
-	
-	@Column(name="userid")
-	private int userid;
-	
-	@ManyToOne(cascade=CascadeType.PERSIST,fetch=FetchType.EAGER)
-	@JoinColumn(name="userid",insertable=false,updatable=false)
-	private Users user;
 
 	public int getForum_id() {
 		return forum_id;
@@ -70,14 +62,6 @@ public class Forum {
 		this.forum_content = forum_content;
 	}
 
-	public Date getCreate_date() {
-		return create_date;
-	}
-
-	public void setCreate_date(Date create_date) {
-		this.create_date = create_date;
-	}
-
 	public String getStatus() {
 		return status;
 	}
@@ -86,30 +70,20 @@ public class Forum {
 		this.status = status;
 	}
 
-	public int getUserid() {
-		return userid;
+	public int getUser_id() {
+		return user_id;
 	}
 
-	public void setUserid(int userid) {
-		this.userid = userid;
+	public void setUser_id(int user_id) {
+		this.user_id = user_id;
 	}
 
-	public Users getUser() {
-		return user;
+	public Date getCreate_date() {
+		return create_date;
 	}
 
-	public void setUser(Users user) {
-		this.user = user;
+	public void setCreate_date(Date create_date) {
+		this.create_date = create_date;
 	}
-
-	
-	
-	
-	
-	
-	
-	
-
-	
 
 }

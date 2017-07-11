@@ -1,67 +1,32 @@
 package com.niit.collabbackend.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.stereotype.Component;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 @Entity
-@Table(name="Users")
+@Table(name = "Users")
 @Component
 
-public class Users {
-	
+public class Users extends Status {
+
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int userid;
-	
-	@NotEmpty(message = "username cannot be blank")
-     private String name;
-	
-	@NotEmpty(message = "password cannot be blank")
-    private String password;
-	
-	@NotEmpty(message = "email cannot be blank")
-	private String email;
-	
-	@NotEmpty(message = "role cannot be blank")
-    private String role;
-	
-	@NotEmpty(message = "status cannot be blank")
-    private String status;
-	
-	@NotEmpty(message = "isonline cannot be blank")
-    private String isOnline;
-	
-	@OneToMany(mappedBy="user",cascade=CascadeType.ALL,fetch=FetchType.EAGER)
-	@JsonManagedReference
-	private List<Blog> blog = new ArrayList<Blog>();
-	
-	@OneToMany(mappedBy="user",cascade=CascadeType.ALL,fetch=FetchType.EAGER)
-	@JsonManagedReference
-	private List<Forum> forum = new ArrayList<Forum>();
-	
-	@OneToMany(mappedBy="user",cascade=CascadeType.ALL,fetch=FetchType.EAGER)
-	@JsonManagedReference
-	private List<Friend> friend =  new ArrayList<Friend>();
-	
-	public int getUserid() {
-		return userid;
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "generator")
+	@SequenceGenerator(name = "generator", sequenceName = "users_seq", allocationSize = 1)
+	private int user_id;
+
+	private String name, password, email, role, status, isOnline;
+
+	public int getUser_id() {
+		return user_id;
 	}
 
-	public void setUserid(int userid) {
-		this.userid = userid;
+	public void setUser_id(int user_id) {
+		this.user_id = user_id;
 	}
 
 	public String getName() {
@@ -74,30 +39,6 @@ public class Users {
 
 	public String getPassword() {
 		return password;
-	}
-
-	public List<Blog> getBlog() {
-		return blog;
-	}
-
-	public void setBlog(List<Blog> blog) {
-		this.blog = blog;
-	}
-
-	public List<Forum> getForum() {
-		return forum;
-	}
-
-	public void setForum(List<Forum> forum) {
-		this.forum = forum;
-	}
-
-	public List<Friend> getFriend() {
-		return friend;
-	}
-
-	public void setFriend(List<Friend> friend) {
-		this.friend = friend;
 	}
 
 	public void setPassword(String password) {
@@ -136,9 +77,4 @@ public class Users {
 		this.isOnline = isOnline;
 	}
 
-	
-	
-	
-
-	
 }

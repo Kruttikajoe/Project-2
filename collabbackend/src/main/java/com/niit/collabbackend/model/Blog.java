@@ -11,51 +11,55 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.stereotype.Component;
 
 @Entity
-@Table(name="Blog")
+@Table(name = "Blog")
 @Component
 
-public class Blog {
-	
+public class Blog extends Status {
+
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "generator")
+	@SequenceGenerator(name = "generator", sequenceName = "blog_seq", allocationSize = 1)
 	private int blog_id;
-	
-	@NotEmpty(message="blog name cannot be blank")
-	private String blog_name;
-	
-	@NotEmpty(message="blog content cannot be blank")
-	private String blog_content;
-	
-    @Column(name="userid")
-    private int userid;
-    
-    @ManyToOne(cascade=CascadeType.PERSIST,fetch=FetchType.EAGER)
-	@JoinColumn(name="userid",insertable=false,updatable=false)
-	private Users user;
-    
-    @NotEmpty(message="Date cannot be blank")
+
+	private int likes, user_id;
+
+	public int getUser_id() {
+		return user_id;
+	}
+
+	public void setUser_id(int user_id) {
+		this.user_id = user_id;
+	}
+
+	private String blog_name, blog_content, status;
+
+	@Temporal(TemporalType.DATE)
 	private Date create_date;
-    
-    @NotNull(message="status cannot be blank")
-	private String status;
-    
-    @NotNull(message="likes cannot be blank")
-	private int likes;
-    
-    
-    public int getBlog_id() {
+
+	public int getBlog_id() {
 		return blog_id;
 	}
 
 	public void setBlog_id(int blog_id) {
 		this.blog_id = blog_id;
+	}
+
+	public int getLikes() {
+		return likes;
+	}
+
+	public void setLikes(int likes) {
+		this.likes = likes;
 	}
 
 	public String getBlog_name() {
@@ -74,20 +78,12 @@ public class Blog {
 		this.blog_content = blog_content;
 	}
 
-	public int getUserid() {
-		return userid;
+	public String getStatus() {
+		return status;
 	}
 
-	public void setUserid(int userid) {
-		this.userid = userid;
-	}
-
-	public Users getUser() {
-		return user;
-	}
-
-	public void setUser(Users user) {
-		this.user = user;
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 	public Date getCreate_date() {
@@ -97,30 +93,5 @@ public class Blog {
 	public void setCreate_date(Date create_date) {
 		this.create_date = create_date;
 	}
-
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
-	}
-
-	public int getLikes() {
-		return likes;
-	}
-
-	public void setLikes(int likes) {
-		this.likes = likes;
-	}
-
-	
-    
-    
-    
-	
-
-
-	
 
 }

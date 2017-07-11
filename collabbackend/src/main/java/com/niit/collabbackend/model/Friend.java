@@ -1,32 +1,24 @@
 package com.niit.collabbackend.model;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
 @Table
-public class Friend {
+public class Friend extends Status {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "generator")
+	@SequenceGenerator(name = "generator", sequenceName = "friend_seq", allocationSize = 1)
 	private int friend_id;
 
+	private int user_id;
+
 	private String status;
-
-	@Column(name = "userid")
-	private int userid;
-
-	@ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
-	@JoinColumn(name = "userid", insertable = false, updatable = false)
-	private Users user;
 
 	public int getFriend_id() {
 		return friend_id;
@@ -36,28 +28,20 @@ public class Friend {
 		this.friend_id = friend_id;
 	}
 
+	public int getUser_id() {
+		return user_id;
+	}
+
+	public void setUser_id(int user_id) {
+		this.user_id = user_id;
+	}
+
 	public String getStatus() {
 		return status;
 	}
 
 	public void setStatus(String status) {
 		this.status = status;
-	}
-
-	public int getUserid() {
-		return userid;
-	}
-
-	public void setUserid(int userid) {
-		this.userid = userid;
-	}
-
-	public Users getUser() {
-		return user;
-	}
-
-	public void setUser(Users user) {
-		this.user = user;
 	}
 
 }

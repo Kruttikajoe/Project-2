@@ -2,57 +2,61 @@ package com.niit.collabbackend.model;
 
 import java.util.Date;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-
-import org.hibernate.validator.constraints.NotEmpty;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
-@Table(name="BlogComment")
+@Table(name = "BlogComment")
 @Component
 
-public class BlogComment {
-	
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int blog_comment_id;
-	
-	@Column
-	private int blog_id;
-	
-	@ManyToOne(cascade=CascadeType.PERSIST,fetch=FetchType.EAGER)
-	@JoinColumn(name="blog_id",insertable=false,updatable=false)
-	private Blog blog;
-	
-	@NotEmpty(message="blog comment cannot be empty")
-	private String b_comment;
-	
-	@NotNull(message="comment date cannot be blank")
-	private Date comment_date;
-	
-	@Column
-	private int userid;
-	
-	@ManyToOne(cascade=CascadeType.PERSIST,fetch=FetchType.EAGER)
-	@JoinColumn(name="userid",insertable=false,updatable=false)
-	private Users user;
+public class BlogComment extends Status {
 
-	public int getBlog_comment_id() {
-		return blog_comment_id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "generator")
+	@SequenceGenerator(name = "generator", sequenceName = "blog_comment_seq", allocationSize = 1)
+	private int bComment_id;
+
+	private String bComment;
+
+	private int user_id;
+
+	private int blog_id;
+
+	@Temporal(TemporalType.DATE)
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+	private Date bComment_date;
+
+	public int getbComment_id() {
+		return bComment_id;
 	}
 
-	public void setBlog_comment_id(int blog_comment_id) {
-		this.blog_comment_id = blog_comment_id;
+	public void setbComment_id(int bComment_id) {
+		this.bComment_id = bComment_id;
+	}
+
+	public String getbComment() {
+		return bComment;
+	}
+
+	public void setbComment(String bComment) {
+		this.bComment = bComment;
+	}
+
+	public int getUser_id() {
+		return user_id;
+	}
+
+	public void setUser_id(int user_id) {
+		this.user_id = user_id;
 	}
 
 	public int getBlog_id() {
@@ -63,48 +67,12 @@ public class BlogComment {
 		this.blog_id = blog_id;
 	}
 
-	public Blog getBlog() {
-		return blog;
+	public Date getbComment_date() {
+		return bComment_date;
 	}
 
-	public void setBlog(Blog blog) {
-		this.blog = blog;
+	public void setbComment_date(Date bComment_date) {
+		this.bComment_date = bComment_date;
 	}
-
-	public String getB_comment() {
-		return b_comment;
-	}
-
-	public void setB_comment(String b_comment) {
-		this.b_comment = b_comment;
-	}
-
-	public Date getComment_date() {
-		return comment_date;
-	}
-
-	public void setComment_date(Date comment_date) {
-		this.comment_date = comment_date;
-	}
-
-	public int getUserid() {
-		return userid;
-	}
-
-	public void setUserid(int userid) {
-		this.userid = userid;
-	}
-
-	public Users getUser() {
-		return user;
-	}
-
-	public void setUser(Users user) {
-		this.user = user;
-	}
-	
-	
-
-	
 
 }

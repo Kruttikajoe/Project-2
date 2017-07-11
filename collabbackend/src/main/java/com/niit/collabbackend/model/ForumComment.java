@@ -2,57 +2,57 @@ package com.niit.collabbackend.model;
 
 import java.util.Date;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-
-import org.hibernate.validator.constraints.NotEmpty;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
-@Table(name="ForumComment")
+@Table(name = "ForumComment")
 @Component
 
-public class ForumComment {
-	
+public class ForumComment extends Status {
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int forum_comment_id;
-	
-	@Column
-	private int forum_id;
-	
-	@ManyToOne(cascade=CascadeType.PERSIST,fetch=FetchType.EAGER)
-	@JoinColumn(name="forum_id",insertable=false,updatable=false)
-	private Forum forum;
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "generator")
+	@SequenceGenerator(name = "generator", sequenceName = "forum_comment_seq", allocationSize = 1)
+	private int fComment_id;
 
-	@NotEmpty(message="forum comment cannot be empty")
-	private String f_comment;
-	
-	@NotNull(message="comment date cannot be blank")
-	private Date create_date;
-	
-	@Column
-	private int userid;
-	
-	@ManyToOne(cascade=CascadeType.PERSIST,fetch=FetchType.EAGER)
-	@JoinColumn(name="userid",insertable=false,updatable=false)
-	private Users user;
+	private String fComment;
 
-	public int getForum_comment_id() {
-		return forum_comment_id;
+	@Temporal(TemporalType.DATE)
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+	private Date fComment_date;
+
+	public int getfComment_id() {
+		return fComment_id;
 	}
 
-	public void setForum_comment_id(int forum_comment_id) {
-		this.forum_comment_id = forum_comment_id;
+	public void setfComment_id(int fComment_id) {
+		this.fComment_id = fComment_id;
+	}
+
+	public String getfComment() {
+		return fComment;
+	}
+
+	public void setfComment(String fComment) {
+		this.fComment = fComment;
+	}
+
+	public int getUser_id() {
+		return user_id;
+	}
+
+	public void setUser_id(int user_id) {
+		this.user_id = user_id;
 	}
 
 	public int getForum_id() {
@@ -63,50 +63,16 @@ public class ForumComment {
 		this.forum_id = forum_id;
 	}
 
-	public Forum getForum() {
-		return forum;
+	public Date getfComment_date() {
+		return fComment_date;
 	}
 
-	public void setForum(Forum forum) {
-		this.forum = forum;
+	public void setfComment_date(Date fComment_date) {
+		this.fComment_date = fComment_date;
 	}
 
-	public String getF_comment() {
-		return f_comment;
-	}
+	private int user_id;
 
-	public void setF_comment(String f_comment) {
-		this.f_comment = f_comment;
-	}
-
-	public Date getCreate_date() {
-		return create_date;
-	}
-
-	public void setCreate_date(Date create_date) {
-		this.create_date = create_date;
-	}
-
-	public int getUserid() {
-		return userid;
-	}
-
-	public void setUserid(int userid) {
-		this.userid = userid;
-	}
-
-	public Users getUser() {
-		return user;
-	}
-
-	public void setUser(Users user) {
-		this.user = user;
-	}
-	
-	
-	
-	
-	
-	
+	private int forum_id;
 
 }
