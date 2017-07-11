@@ -2,7 +2,10 @@ package com.niit.collabbackend.DAO;
 
 import java.util.List;
 
+import org.hibernate.Criteria;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.niit.collabbackend.model.Users;
@@ -61,6 +64,23 @@ public class UserDAOImpl implements UserDAO {
 			return (Users) sessionFactory.getCurrentSession().get(Users.class, user_id);
 		} catch (Exception e) {
 			System.out.println("Exception in getParticularUser of UserDAOImpl");
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	@SuppressWarnings("deprecation")
+	@Transactional
+	public Users validateUser(String email, String password) {
+		try {
+			Session session = sessionFactory.openSession();
+			Criteria cr = session.createCriteria(Users.class).add(Restrictions.eq("email", email))
+					.add(Restrictions.eq("password", password));
+			Users user = (Users) cr.uniqueResult();
+			session.close();
+			return user;
+		} catch (Exception e) {
+			System.out.println("Exception in validateUser of UserDAOImpl");
 			e.printStackTrace();
 			return null;
 		}

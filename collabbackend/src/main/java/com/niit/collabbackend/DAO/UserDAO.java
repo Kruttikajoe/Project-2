@@ -14,4 +14,6 @@ public interface UserDAO {
 
 	public Users getParticularUser(int user_id);
 
+	public Users validateUser(String email, String password);
+
 }
