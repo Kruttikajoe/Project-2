@@ -45,6 +45,7 @@ public class FriendDAOImpl implements FriendDAO {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	@Transactional
 	public List<Friend> getListOfFriend() {
 		try {

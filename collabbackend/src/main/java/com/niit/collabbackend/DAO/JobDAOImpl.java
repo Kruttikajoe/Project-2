@@ -53,6 +53,7 @@ public class JobDAOImpl implements JobDAO {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	@Transactional
 	public List<Job> getListOfJob() {
